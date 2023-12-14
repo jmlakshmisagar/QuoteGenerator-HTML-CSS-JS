@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator </title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 95vw;
+            height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fcffc1;
+        }
+
+        .page {
+            background-color: #9bf4d599;
+            /* width: 500px; */
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            border: 3px solid #053424;
+            font-family: 'SairaSemiCondensedRegular';
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .page h2 {
+            font-size: 2.4em;
+            border-bottom: 2px solid #053424;
+            margin: 30px 50px 0px 50px;
+        }
+
+        .page p::after,
+        .page p::before {
+            content: ' " ';
+        }
+
+        .page p {
+            width: 100%;
+            text-align: left;
+            color: black;
+            font-size: 25px;
+            font-weight: 700;
+            height: auto;
+        }
+
+        .page span {
+            text-align: right;
+            width: 100%;
+            color: black;
+            font-size: 20px;
+            font-weight: 700;
+
+        }
+
+        .page span::before {
+            content: '- ';
+        }
+
+        .button {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button button {
+            width: 200px;
+            height: 40px;
+            border-radius: 20px;
+            border: 2px solid #053424;
+            background: linear-gradient(#053424, 50%, #139f70)fixed;
+            color: #fcffc1;
+            font-family: 'SairaSemiCondensedRegular';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .button button:hover {
+            background: linear-gradient(#139f70, 50%, #053424);
+        }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/saira-semi-condensed" type="text/css" />
+</head>
+
+<body>
+    <div class="page">
+        <h2> Quote Generator </h2>
+        <p id="quote">Loading!.....</p>
+        <span id="author">Loading!....</span>
+        <div class="button">
+            <button onclick="Generate()">Generate a Quote</button>
+        </div>
+    </div>
+    <script>
+        async function Generate() {
+            let quote = await fetch("https://api.quotable.io/random");
+            var data = await quote.json();
+            console.log(data);
+            document.getElementById("quote").innerHTML = data.content;
+            document.getElementById("author").innerHTML = data.author;
+        }
+    </script>
+</body>
+
+</html>
